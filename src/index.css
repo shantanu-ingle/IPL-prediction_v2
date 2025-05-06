@@ -1,3 +1,4 @@
+/* Tailwind CSS imports are not needed since we're using raw CSS */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +11,258 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Custom styles for the app */
+.min-h-screen {
+  min-height: 100vh;
+}
+
+.bg-gradient-to-br {
+  background: linear-gradient(to bottom right, #ECEFF1, #CFD8DC); /* Deeper off-white gradient */
+}
+
+.text-white {
+  color: #F5F5F5; /* Off-white for text on dark backgrounds */
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.bg-purple-800 {
+  background-color: #9575CD; /* Richer IPL purple for containers */
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.shadow-lg {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.header-banner {
+  text-align: center;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-yellow-400 {
+  color: #42A5F5; /* Darker IPL blue for headings */
+}
+
+.max-w-4xl {
+  max-width: 56rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg-white\/10 {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(6px);
+}
+
+.p-6 {
+  padding: 1.5rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-yellow-400 {
+  border-color: #FF8A65; /* Deeper IPL orange for borders */
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.text-red-400 {
+  color: #E53935; /* Deeper coral for errors */
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.md\:grid-cols-2 {
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.block {
+  display: block;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.text-yellow-200 {
+  color: #455A64; /* Darker gray for labels */
+}
+
+.w-full {
+  width: 100%;
+}
+
+.p-2 {
+  padding: 0.5rem;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.focus\:outline-none:focus {
+  outline: none;
+}
+
+.focus\:ring-2:focus {
+  --tw-ring-offset-width: 2px;
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus\:ring-yellow-400:focus {
+  --tw-ring-color: #42A5F5; /* Darker IPL blue for focus rings */
+}
+
+.text-gray-400 {
+  color: #455A64; /* Darker gray for placeholder text */
+}
+
+.text-white {
+  color: #F5F5F5; /* Off-white for text on dark backgrounds */
+}
+
+.bg-yellow-500 {
+  background-color: #42A5F5; /* Darker IPL blue for primary buttons */
+}
+
+.text-purple-900 {
+  color: #263238; /* Dark slate gray for text on bright buttons */
+}
+
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.hover\:bg-yellow-600:hover {
+  background-color: #2196F3; /* Even darker blue on hover */
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  margin-top: 1rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.text-yellow-300 {
+  color: #455A64; /* Darker gray for section headings */
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.max-w-md {
+  max-width: 28rem;
+}
+
+.bg-green-500 {
+  background-color: #42A5F5; /* Darker IPL blue for secondary buttons */
+}
+
+.hover\:bg-green-600:hover {
+  background-color: #2196F3; /* Even darker blue on hover */
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
+.loader {
+  border-top-color: #42A5F5; /* Darker IPL blue for loader */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Ensure high contrast for text on all backgrounds */
+h1, h2, h3, p, label, input, select {
+  color: #263238; /* Dark slate gray for text on light backgrounds */
+}
+
+.bg-purple-800 h1,
+.bg-purple-800 h2,
+.bg-purple-800 h3,
+.bg-purple-800 p,
+.bg-purple-800 label,
+.bg-purple-800 input,
+.bg-purple-800 select {
+  color: #F5F5F5; /* Off-white for text on dark containers */
+}
+
+input, select {
+  background-color: #ECEFF1; /* Match the deeper light background for inputs */
+  border-color: #9575CD; /* Richer IPL purple for input borders */
 }

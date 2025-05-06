@@ -1,0 +1,42 @@
+match_id,date,venue,team1,team2,stage,toss_winner,toss_decision,first_ings_score,first_ings_wkts,second_ings_score,second_ings_wkts,match_winner,won_by,balls_left,player_of_the_match,top_scorer,highscore,best_bowling,best_bowling_figure
+1,"March 22,2025","Eden Gardens, Kolkata",KKR,RCB,League,RCB,Bowl,174,8,177,3,RCB,7 wickets,22,Krunal Pandya,Virat Kohli,59,Krunal Pandya,3--29
+2,"March 23,2025","Rajiv Gandhi International Stadium, Hyderabad",SRH,RR,League,RR,Bowl,286,6,242,6,SRH,44 runs,0,Ishan Kishan,Ishan Kishan,106,Tushar Deshpande,3--44
+3,"March 23,2025","MA Chidambaram Stadium, Chennai",CSK,MI,League,CSK,Bowl,155,9,158,6,CSK,4 wickets,5,Noor Ahmad,Rachin Ravindra,65,Noor Ahmad,4--18
+4,"March 24,2025","ACA-VDCA Cricket Stadium, Vishakhapatnam",DC,LSG,League,DC,Bowl,209,8,211,9,DC,1 wickets,3,Ashutosh Sharma,Nicholas Pooran,75,Mitchell Starc,3--42
+5,"March 25,2025","Narendra Modi Stadium, Ahmedabad",GT,PBKS,League,GT,Bowl,243,5,232,5,PBKS,11 runs,0,Shreyas Iyer,Shreyas Iyer,97,Sai Kishore,3--30
+6,"March 26,2025","Barsapara Stadium, Guwahati",RR,KKR,League,KKR,Bowl,151,9,153,2,KKR,8 wickets,15,Quinton de Kock,Quinton de Kock,97,Varun Chakravarthy,2--17
+7,"March 27,2025","Rajiv Gandhi International Stadium, Hyderabad",SRH,LSG,League,LSG,Bowl,190,9,193,5,LSG,5 wickets,23,Shardul Thakur,Nicholas Pooran,70,Shardul Thakur,4--34
+8,"March 28,2025","MA Chidambaram Stadium, Chennai",CSK,RCB,League,CSK,Bowl,196,7,146,8,RCB,50 runs,0,Rajat Patidar,Rajat Patidar,51,Josh Hazlewood,3--21
+9,"March 29,2025","Narendra Modi Stadium, Ahmedabad",GT,MI,League,MI,Bowl,196,8,160,6,GT,36 runs,0,Prasidh Krishna,Sai Sudarshan,63,Prasidh Krishna,2--18
+10,"March 30,2025","ACA-VDCA Cricket Stadium, Vishakhapatnam",DC,SRH,League,SRH,Bat,163,10,166,3,DC,7 wickets,24,Mitchell Starc,Aniket Verma,74,Mitchell Starc,5--35
+11,"March 30,2025","Barsapara Stadium, Guwahati",RR,CSK,League,CSK,Bowl,182,9,176,6,RR,6 runs,0,Nitish Rana,Nitish Rana,81,Wanindu Hasranga,4--35
+12,"March 31,2025","Wankhede Stadium, Mumbai",MI,KKR,League,MI,Bowl,116,10,121,2,MI,8 wickets,43,Ashwani Kumar,Ryan Rickelton,62,Ashwani Kumar,4--24
+13,"April 01,2025","Ekana Cricket Stadium, Lucknow",LSG,PBKS,League,PBKS,Bowl,171,7,177,2,PBKS,8 wickets,22,Prabhsimran Singh,Prabhsimran Singh,69,Arshdeep Singh,3--43
+14,"April 02,2025","M. Chinnaswamy Stadium, Bangalore",RCB,GT,League,GT,Bowl,169,8,170,2,GT,8 wickets,13,Mohammed Siraj,Jos Buttler,73,Mohammed Siraj,3--19
+15,"April 03,2025","Eden Gardens, Kolkata",KKR,SRH,League,SRH,Bowl,200,6,120,10,KKR,80 runs,20,Vaibhav Arora,Venkatesh Iyer,60,Varun Chakravarthy,3--22
+16,"April 04,2025","Ekana Cricket Stadium, Lucknow",LSG,MI,League,MI,Bowl,203,8,191,5,LSG,12 runs,0,Digvesh Singh,Suryakumar Yadav,67,Hardik Pandya,5--36
+17,"April 05,2025","MA Chidambaram Stadium, Chennai",CSK,DC,League,DC,Bat,183,6,158,5,DC,25 runs,0,KL Rahul,KL Rahul,77,Khaleel Ahmed,2--25
+18,"April 05,2025","New PCA Cricket Stadium, Mullanpur",PBKS,RR,League,PBKS,Bowl,205,4,155,9,RR,50 runs,0,Jofra Archer,Yashasvi Jaiswal,67,Jofra Archer,3--25
+19,"April 06,2025","Rajiv Gandhi International Stadium, Hyderabad",SRH,GT,League,GT,Bowl,152,8,153,3,GT,7 wickets,20,Mohammed Siraj,Shubman Gill,61,Mohammed Siraj,4--17
+20,"April 07,2025","Wankhede Stadium, Mumbai",MI,RCB,League,MI,Bowl,221,5,209,9,RCB,12 runs,0,Rajat Patidar,Virat Kohli,67,Krunal Pandya,4--45
+21,"April 08,2025","Eden Gardens, Kolkata",KKR,LSG,League,KKR,Bowl,238,3,234,7,LSG,4 runs,0,Nicholas Pooran,Nicholas Pooran,87,Harshit Rana,2--51
+22,"April 08,2025","New PCA Cricket Stadium, Mullanpur",PBKS,CSK,League,PBKS,Bat,219,6,201,5,PBKS,18 runs,0,Priyansh Arya,Priyansh Arya,103,Lockie Ferguson,2--40
+23,"April 09,2025","Narendra Modi Stadium, Ahmedabad",GT,RR,League,RR,Bowl,217,6,159,10,GT,58 runs,4,Sai Sudarshan,Sai Sudarshan,82,Prasidh Krishna,3--24
+24,"April 10,2025","M. Chinnaswamy Stadium, Bangalore",RCB,DC,League,DC,Bowl,163,7,169,4,DC,6 wickets,13,KL Rahul,KL Rahul,93,Kuldeep Yadav,2--17
+25,"April 11,2025","MA Chidambaram Stadium, Chennai",CSK,KKR,League,KKR,Bowl,103,9,107,2,KKR,8 wickets,59,Sunil Narine,Sunil Narine,44,Sunil Narine,3--13
+26,"April 12,2025","Ekana Cricket Stadium, Lucknow",LSG,GT,League,LSG,Bowl,180,6,186,4,LSG,6 wickets,3,Aiden Markram,Nicholas Pooran,61,Prasidh Krishna,2--26
+27,"April 12,2025","Rajiv Gandhi International Stadium, Hyderabad",SRH,PBKS,League,PBKS,Bat,245,6,247,2,SRH,8 wickets,9,Abhishek Sharma,Abhishek Sharma,141,Harshal Patel,4--42
+28,"April 13,2025","Sawai Mansingh Stadium, Jaipur",RR,RCB,League,RCB,Bowl,173,4,175,1,RCB,9 wickets,15,Phil Salt,Yashasvi Jaiswal,75,Krunal Pandya,1--29
+29,"April 13,2025","Arun Jaitley Stadium, Delhi",DC,MI,League,DC,Bowl,205,5,193,10,DC,12 runs,6,Karn Sharma,Karun Nair,89,Karn Sharma,3--36
+30,"April 14,2025","Ekana Cricket Stadium, Lucknow",LSG,CSK,League,CSK,Bowl,166,7,168,5,CSK,5 wickets,3,MS Dhoni,Rishabh Pant,63,Ravi Bishnoi,2--18
+31,"April 15,2025","New PCA Cricket Stadium, Mullanpur",PBKS,KKR,League,PBKS,Bat,111,10,95,10,PBKS,16 runs,29,Yuzvendra Chahal,Angkrish Raghuvanshi,37,Yuzvendra Chahal,4--28
+32,"April 16,2025","Arun Jaitley Stadium, Delhi",DC,RR,League,RR,Bowl,188,5,188,4,DC,super over,0,Mitchell Starc,Nitish Rana,51,Jofra Archer,2--32
+33,"April 17,2025","Wankhede Stadium, Mumbai",MI,SRH,League,MI,Bowl,162,5,166,6,MI,4 wickets,11,Will Jacks,Abhishek Sharma,40,Pat Cummins,3--36
+34,"April 18,2025","M. Chinnaswamy Stadium, Bangalore",RCB,PBKS,League,PBKS,Bowl,95,9,98,5,PBKS,5 wickets,11,Tim David,Tim David,50,Josh Hazlewood,3--14
+35,"April 19,2025","Narendra Modi Stadium, Ahmedabad",GT,DC,League,GT,Bowl,203,8,204,3,GT,7 wickets,4,Jos Buttler,Jos Buttler,97,Prasidh Krishna,4--41
+36,"April 19,2025","Sawai Mansingh Stadium, Jaipur",RR,LSG,League,LSG,Bat,180,5,178,5,LSG,2 runs,0,Avesh Khan,Yashasvi Jaiswal,74,Avesh Khan,3--37
+37,"April 20,2025","New PCA Cricket Stadium, Mullanpur",PBKS,RCB,League,RCB,Bowl,157,6,159,3,PBKS,7 wickets,7,Virat Kohli,Virat Kohli,73,Krunal Pandya,2--25
+38,"April 20,2025","Wankhede Stadium, Mumbai",MI,CSK,League,MI,Bowl,176,5,177,1,MI,9 wickets,26,Rohit Sharma,Rohit Sharma,76,Jasprit Bumrah,2--25
+39,"April 21,2025","Eden Gardens, Kolkata",KKR,GT,League,KKR,Bowl,198,3,159,8,GT,39 runs,0,Shubman Gill,Shubman Gill,90,Prasidh Krishna,2--25
+40,"April 22,2025","Ekana Cricket Stadium, Lucknow",LSG,DC,League,DC,Bowl,159,6,161,2,DC,8 wickets,13,Mukesh Kumar,KL Rahul,57,Mukesh Kumar,4--33
+41,"April 23,2025","Rajiv Gandhi International Stadium, Hyderabad",SRH,MI,League,SRH,Bowl,143,8,146,3,MI,7 wickets,26,Trent Boult,Heinrich Klassen,71,Trent Boult,4--26
