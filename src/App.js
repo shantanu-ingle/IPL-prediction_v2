@@ -5,8 +5,8 @@ import './index.css';
 function App() {
   const [options, setOptions] = useState({ teams: [], batsmen: [], bowlers: [], venues: [] });
   const [prediction, setPrediction] = useState(null);
+  const [chatHistory, setChatHistory] = useState([]);
   const [chatInput, setChatInput] = useState('');
-  const [chatResponse, setChatResponse] = useState('');
   const [formData, setFormData] = useState({
     team1_name: "",
     team2_name: "",
@@ -23,8 +23,8 @@ function App() {
   });
   const [formError, setFormError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [plotTimestamp, setPlotTimestamp] = useState(Date.now()); // For cache busting
 
-  // Fetch teams and venues on component mount (initial load without team filtering)
   useEffect(() => {
     axios.get('http://localhost:8000/api/options/')
       .then(response => {
@@ -47,7 +47,6 @@ function App() {
       });
   }, []);
 
-  // Fetch batsmen and bowlers whenever team1_name or team2_name changes
   useEffect(() => {
     if (formData.team1_name && formData.team2_name) {
       axios.get('http://localhost:8000/api/options/', {
@@ -62,7 +61,6 @@ function App() {
             batsmen: response.data.batsmen,
             bowlers: response.data.bowlers
           }));
-          // Reset player selections if they are no longer in the filtered list
           setFormData(prev => ({
             ...prev,
             player1_name: response.data.batsmen.includes(prev.player1_name) ? prev.player1_name : response.data.batsmen[0] || '',
@@ -83,45 +81,23 @@ function App() {
       ...prev,
       [name]: name.includes("overs") ? parseFloat(value) : value
     }));
-    setFormError(''); // Clear error on input change
+    setFormError('');
   };
 
   const validateForm = () => {
-    // Check required fields
-    const requiredFields = [
-      'team1_name', 'team2_name', 'venue', 'player1_name', 'player1_team',
-      'player2_name', 'player2_team', 'overs_team1', 'overs_team2', 'toss_winner'
-    ];
-    for (const field of requiredFields) {
-      if (!formData[field] || formData[field] === "") {
-        return `Please fill in all fields: ${field} is empty`;
-      }
+    if (!formData.team1_name || !formData.team2_name) {
+      return "Please select both teams";
     }
-
-    // Validate team names
     if (!options.teams.includes(formData.team1_name) || !options.teams.includes(formData.team2_name)) {
       return `Invalid team names. Must be one of: ${options.teams.join(", ")}`;
     }
-
-    // Validate player teams
-    if (formData.player1_team !== formData.team1_name && formData.player1_team !== formData.team2_name) {
-      return `Player 1 team must be either ${formData.team1_name} or ${formData.team2_name}`;
-    }
-    if (formData.player2_team !== formData.team1_name && formData.player2_team !== formData.team2_name) {
-      return `Player 2 team must be either ${formData.team1_name} or ${formData.team2_name}`;
-    }
-
-    // Validate overs
     if (formData.overs_team1 < 0 || formData.overs_team1 > 20 || formData.overs_team2 < 0 || formData.overs_team2 > 20) {
       return "Overs must be between 0 and 20";
     }
-
-    // Validate venue
-    if (!options.venues.includes(formData.venue)) {
+    if (formData.venue && !options.venues.includes(formData.venue)) {
       return `Invalid venue. Must be one of: ${options.venues.join(", ")}`;
     }
-
-    return null; // No errors
+    return null;
   };
 
   const fetchPrediction = async () => {
@@ -130,12 +106,13 @@ function App() {
       setFormError(error);
       return;
     }
-
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:8000/api/predict/', formData);
       setPrediction(response.data);
       setFormError('');
+      setChatHistory([]);
+      setPlotTimestamp(Date.now()); // Update timestamp to bust cache
     } catch (error) {
       console.error('Error fetching prediction:', error);
       setFormError('Failed to fetch prediction. Ensure the Django server is running.');
@@ -144,32 +121,27 @@ function App() {
     }
   };
 
-  const handleChatSubmit = () => {
-    const input = chatInput.toLowerCase();
+  const handleChatSubmit = async () => {
     if (!prediction) {
-      setChatResponse('Please fetch a prediction first.');
-      setChatInput('');
+      setFormError('Please fetch a prediction first.');
       return;
     }
-
-    if (input.includes('who will win')) {
-      setChatResponse(`The model predicts ${prediction.match_winner.team} will win.`);
-    } else if (input.includes('how many runs')) {
-      if (input.includes(formData.team1_name.toLowerCase())) {
-        setChatResponse(`${formData.team1_name} is predicted to score ${prediction[`${formData.team1_name}_runs`]?.predicted_runs.toFixed(0)} runs.`);
-      } else if (input.includes(formData.team2_name.toLowerCase())) {
-        setChatResponse(`${formData.team2_name} is predicted to score ${prediction[`${formData.team2_name}_runs`]?.predicted_runs.toFixed(0)} runs.`);
-      } else if (input.includes('player') || input.includes(formData.player1_name.toLowerCase())) {
-        setChatResponse(`${formData.player1_name} is predicted to score ${prediction.player_runs?.predicted_runs.toFixed(0)} runs with a strike rate of ${prediction.player_runs?.strike_rate?.toFixed(0)}.`);
-      } else {
-        setChatResponse('Please specify a team or player (e.g., "How many runs for Chennai Super Kings?" or "How many runs for player?").');
-      }
-    } else if (input.includes('wickets') || input.includes(formData.player2_name.toLowerCase())) {
-      setChatResponse(`${formData.player2_name} is predicted to take ${prediction.player_wickets?.predicted_wickets} wickets with an economy rate of ${prediction.player_wickets?.economy_rate?.toFixed(2)}.`);
-    } else {
-      setChatResponse('I can answer questions about predictions. Try asking "Who will win?" or "How many runs for Chennai Super Kings?"');
+    if (!chatInput.trim()) {
+      setFormError('Please enter a message.');
+      return;
     }
-    setChatInput('');
+    setLoading(true);
+    try {
+      const response = await axios.post('http://localhost:8000/api/chat/', { message: chatInput });
+      setChatHistory(prev => [...prev, { user: chatInput, response: response.data.response }]);
+      setChatInput('');
+      setFormError('');
+    } catch (error) {
+      console.error('Error in chat:', error);
+      setFormError('Failed to chat with the model.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -187,7 +159,7 @@ function App() {
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
-            <label className="block text-sm font-medium text-yellow-200">Team 1 Name</label>
+            <label className="block text-sm font-medium text-yellow-200">Team 1 Name *</label>
             <select
               name="team1_name"
               value={formData.team1_name}
@@ -201,7 +173,7 @@ function App() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-yellow-200">Team 2 Name</label>
+            <label className="block text-sm font-medium text-yellow-200">Team 2 Name *</label>
             <select
               name="team2_name"
               value={formData.team2_name}
@@ -215,7 +187,7 @@ function App() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-yellow-200">Venue</label>
+            <label className="block text-sm font-medium text-yellow-200">Venue (Optional)</label>
             <select
               name="venue"
               value={formData.venue}
@@ -229,7 +201,7 @@ function App() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-yellow-200">Batsman</label>
+            <label className="block text-sm font-medium text-yellow-200">Batsman (Optional)</label>
             <select
               name="player1_name"
               value={formData.player1_name}
@@ -242,21 +214,22 @@ function App() {
               ))}
             </select>
           </div>
+          {formData.player1_name && (
+            <div>
+              <label className="block text-sm font-medium text-yellow-200">Batsman Team</label>
+              <select
+                name="player1_team"
+                value={formData.player1_team}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-yellow-400 rounded bg-purple-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              >
+                <option value={formData.team1_name} className="text-white">{formData.team1_name}</option>
+                <option value={formData.team2_name} className="text-white">{formData.team2_name}</option>
+              </select>
+            </div>
+          )}
           <div>
-            <label className="block text-sm font-medium text-yellow-200">Batsman Team</label>
-            <select
-              name="player1_team"
-              value={formData.player1_team}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-yellow-400 rounded bg-purple-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            >
-              <option value="" className="text-gray-400">Select Team</option>
-              <option value={formData.team1_name}>{formData.team1_name}</option>
-              <option value={formData.team2_name}>{formData.team2_name}</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-yellow-200">Bowler</label>
+            <label className="block text-sm font-medium text-yellow-200">Bowler (Optional)</label>
             <select
               name="player2_name"
               value={formData.player2_name}
@@ -269,21 +242,22 @@ function App() {
               ))}
             </select>
           </div>
+          {formData.player2_name && (
+            <div>
+              <label className="block text-sm font-medium text-yellow-200">Bowler Team</label>
+              <select
+                name="player2_team"
+                value={formData.player2_team}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-yellow-400 rounded bg-purple-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              >
+                <option value={formData.team1_name} className="text-white">{formData.team1_name}</option>
+                <option value={formData.team2_name} className="text-white">{formData.team2_name}</option>
+              </select>
+            </div>
+          )}
           <div>
-            <label className="block text-sm font-medium text-yellow-200">Bowler Team</label>
-            <select
-              name="player2_team"
-              value={formData.player2_team}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-yellow-400 rounded bg-purple-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            >
-              <option value="" className="text-gray-400">Select Team</option>
-              <option value={formData.team1_name}>{formData.team1_name}</option>
-              <option value={formData.team2_name}>{formData.team2_name}</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-yellow-200">Overs for Team 1</label>
+            <label className="block text-sm font-medium text-yellow-200">Overs for Team 1 (Optional)</label>
             <input
               type="number"
               name="overs_team1"
@@ -294,7 +268,7 @@ function App() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-yellow-200">Overs for Team 2</label>
+            <label className="block text-sm font-medium text-yellow-200">Overs for Team 2 (Optional)</label>
             <input
               type="number"
               name="overs_team2"
@@ -305,15 +279,15 @@ function App() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-yellow-200">Toss Winner</label>
+            <label className="block text-sm font-medium text-yellow-200">Toss Winner (Optional)</label>
             <select
               name="toss_winner"
               value={formData.toss_winner}
               onChange={handleInputChange}
               className="w-full p-2 border border-yellow-400 rounded bg-purple-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
             >
-              <option value="team1">{formData.team1_name}</option>
-              <option value="team2">{formData.team2_name}</option>
+              <option value="team1" className="text-white">{formData.team1_name || "Team 1"}</option>
+              <option value="team2" className="text-white">{formData.team2_name || "Team 2"}</option>
             </select>
           </div>
         </div>
@@ -353,7 +327,11 @@ function App() {
                 {prediction.player_runs.trend_plot && (
                   <div>
                     <h3 className="text-lg font-medium text-yellow-300">Player Trend Plot</h3>
-                    <img src={`http://localhost:8000${prediction.player_runs.trend_plot}`} alt="Player Trend" className="w-full max-w-md rounded-lg shadow-md" />
+                    <img 
+                      src={`http://localhost:8000${prediction.player_runs.trend_plot}?t=${plotTimestamp}`} 
+                      alt="Player Trend" 
+                      className="w-full max-w-md rounded-lg shadow-md" 
+                    />
                   </div>
                 )}
               </div>
@@ -368,13 +346,21 @@ function App() {
           </div>
         )}
         <div className="mt-6">
-          <h2 className="text-xl font-semibold text-yellow-300">Chatbot</h2>
+          <h2 className="text-xl font-semibold text-yellow-300">Chat with the Analyst</h2>
+          <div className="chat-history mb-4 max-h-60 overflow-y-auto">
+            {chatHistory.map((chat, index) => (
+              <div key={index} className="mb-2">
+                <p><strong className="text-yellow-200">You:</strong> {chat.user}</p>
+                <p><strong className="text-yellow-200">Analyst:</strong> {chat.response}</p>
+              </div>
+            ))}
+          </div>
           <input
             type="text"
             value={chatInput}
             onChange={(e) => setChatInput(e.target.value)}
             className="w-full p-2 border border-yellow-400 rounded bg-purple-800 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400"
-            placeholder="Ask about predictions (e.g., Who will win?)"
+            placeholder="Ask anything about the prediction..."
           />
           <button
             onClick={handleChatSubmit}
@@ -382,9 +368,6 @@ function App() {
           >
             Send
           </button>
-          {chatResponse && (
-            <p className="mt-2"><strong className="text-yellow-200">Chatbot:</strong> {chatResponse}</p>
-          )}
         </div>
       </div>
     </div>

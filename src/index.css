@@ -19,11 +19,11 @@ code {
 }
 
 .bg-gradient-to-br {
-  background: linear-gradient(to bottom right, #ECEFF1, #CFD8DC); /* Deeper off-white gradient */
+  background: linear-gradient(to bottom right, #ECEFF1, #CFD8DC);
 }
 
 .text-white {
-  color: #F5F5F5; /* Off-white for text on dark backgrounds */
+  color: #F5F5F5;
 }
 
 .p-4 {
@@ -31,7 +31,7 @@ code {
 }
 
 .bg-purple-800 {
-  background-color: #9575CD; /* Richer IPL purple for containers */
+  background-color: #9575CD;
 }
 
 .rounded-lg {
@@ -59,7 +59,7 @@ code {
 }
 
 .text-yellow-400 {
-  color: #42A5F5; /* Darker IPL blue for headings */
+  color: #42A5F5;
 }
 
 .max-w-4xl {
@@ -88,7 +88,7 @@ code {
 }
 
 .border-yellow-400 {
-  border-color: #FF8A65; /* Deeper IPL orange for borders */
+  border-color: #FF8A65;
 }
 
 .text-2xl {
@@ -104,7 +104,7 @@ code {
 }
 
 .text-red-400 {
-  color: #E53935; /* Deeper coral for errors */
+  color: #E53935;
 }
 
 .grid {
@@ -138,7 +138,7 @@ code {
 }
 
 .text-yellow-200 {
-  color: #455A64; /* Darker gray for labels */
+  color: #455A64;
 }
 
 .w-full {
@@ -163,23 +163,23 @@ code {
 }
 
 .focus\:ring-yellow-400:focus {
-  --tw-ring-color: #42A5F5; /* Darker IPL blue for focus rings */
+  --tw-ring-color: #42A5F5;
 }
 
 .text-gray-400 {
-  color: #455A64; /* Darker gray for placeholder text */
+  color: #455A64;
 }
 
 .text-white {
-  color: #F5F5F5; /* Off-white for text on dark backgrounds */
+  color: #F5F5F5;
 }
 
 .bg-yellow-500 {
-  background-color: #42A5F5; /* Darker IPL blue for primary buttons */
+  background-color: #42A5F5;
 }
 
 .text-purple-900 {
-  color: #263238; /* Dark slate gray for text on bright buttons */
+  color: #263238;
 }
 
 .px-4 {
@@ -193,7 +193,7 @@ code {
 }
 
 .hover\:bg-yellow-600:hover {
-  background-color: #2196F3; /* Even darker blue on hover */
+  background-color: #2196F3;
 }
 
 .mb-4 {
@@ -213,7 +213,7 @@ code {
 }
 
 .text-yellow-300 {
-  color: #455A64; /* Darker gray for section headings */
+  color: #455A64;
 }
 
 .text-lg {
@@ -225,11 +225,11 @@ code {
 }
 
 .bg-green-500 {
-  background-color: #42A5F5; /* Darker IPL blue for secondary buttons */
+  background-color: #42A5F5;
 }
 
 .hover\:bg-green-600:hover {
-  background-color: #2196F3; /* Even darker blue on hover */
+  background-color: #2196F3;
 }
 
 .mt-2 {
@@ -237,7 +237,7 @@ code {
 }
 
 .loader {
-  border-top-color: #42A5F5; /* Darker IPL blue for loader */
+  border-top-color: #42A5F5;
   animation: spin 1s linear infinite;
 }
 
@@ -249,7 +249,7 @@ code {
 
 /* Ensure high contrast for text on all backgrounds */
 h1, h2, h3, p, label, input, select {
-  color: #263238; /* Dark slate gray for text on light backgrounds */
+  color: #263238;
 }
 
 .bg-purple-800 h1,
@@ -259,10 +259,26 @@ h1, h2, h3, p, label, input, select {
 .bg-purple-800 label,
 .bg-purple-800 input,
 .bg-purple-800 select {
-  color: #F5F5F5; /* Off-white for text on dark containers */
+  color: #F5F5F5;
 }
 
 input, select {
-  background-color: #ECEFF1; /* Match the deeper light background for inputs */
-  border-color: #9575CD; /* Richer IPL purple for input borders */
+  background-color: #ECEFF1;
+  border-color: #9575CD;
+}
+
+/* Chat history styles */
+.chat-history {
+  border: 1px solid #FF8A65;
+  padding: 1rem;
+  background-color: #9575CD;
+  border-radius: 0.5rem;
+}
+
+.max-h-60 {
+  max-height: 15rem;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
 }
